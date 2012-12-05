@@ -21,6 +21,7 @@ public class MakoView extends View {
 		catch(IOException e) {
 			e.printStackTrace();
 		}
+		vm.run();
 		vm.sync();
 	}
 
@@ -43,6 +44,7 @@ public class MakoView extends View {
 
 	@Override
 	public void onDraw(Canvas c) {
-		c.drawBitmap(vm.p, 0, 0, 0, 0, 320, 240, false, null);
+		super.onDraw(c);
+		c.drawBitmap(vm.p, 0, 320, 0, 0, 320, 240, false, null);
 	}
 }
