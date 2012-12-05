@@ -1,0 +1,6 @@
+# view AndroidManifest.xml #generated:8
+-keep class com.rtg.makovm.MainActivity { <init>(...); }
+
+# view res/layout/main.xml #generated:14
+-keep class com.rtg.makovm.MakoView { <init>(...); }
+
