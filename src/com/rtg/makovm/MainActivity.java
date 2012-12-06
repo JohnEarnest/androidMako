@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 
 public class MainActivity extends Activity {
-	private MakoView mMakoView = null;
+	private MakoView view = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -13,19 +13,25 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main);
 
 		// Retrieve a reference to the view inflated in the layout
-		mMakoView = (MakoView) findViewById(R.id.MainActivity_MakoView);
+		view = (MakoView) findViewById(R.id.MainActivity_MakoView);
 	}
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		mMakoView.onKeyUp(keyCode, event);
+		view.onKeyUp(keyCode, event);
 		return super.onKeyUp(keyCode, event);
 	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		mMakoView.onKeyDown(keyCode, event);
+		view.onKeyDown(keyCode, event);
 		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		view.dispatchKeyEvent(event);
+		return super.dispatchKeyEvent(event);
 	}
 
 	@Override

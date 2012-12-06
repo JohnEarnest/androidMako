@@ -25,8 +25,6 @@ public class MakoView extends View {
 		catch(IOException e) {
 			e.printStackTrace();
 		}
-		vm.run();
-		vm.sync();
 	}
 
 	private static int[] loadRom(InputStream i, int[] prev) {
@@ -59,6 +57,20 @@ public class MakoView extends View {
 			System.out.println("Unable to load rom!");
 			return prev;
 		}
+	}
+
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		if (event.getAction() == KeyEvent.ACTION_DOWN) {
+			if (keyCode == KeyEvent.KEYCODE_DEL) {
+				// I don't seem to be actually getting these key events.
+				vm.keyQueue.add(8);
+			}
+			else {
+				vm.keyQueue.add(event.getUnicodeChar());
+			}
+		}
+		return super.dispatchKeyEvent(event);
 	}
 	
 	@Override
