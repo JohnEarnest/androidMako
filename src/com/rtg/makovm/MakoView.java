@@ -62,7 +62,7 @@ public class MakoView extends View {
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent event) {
 		if (event.getAction() == KeyEvent.ACTION_DOWN) {
-			if (keyCode == KeyEvent.KEYCODE_DEL) {
+			if (event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
 				// I don't seem to be actually getting these key events.
 				vm.keyQueue.add(8);
 			}
