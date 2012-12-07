@@ -18,6 +18,8 @@ public class MakoView extends View {
 
 	public MakoView(Context c, AttributeSet a) {
 		super(c, a);
+		if(isInEditMode())
+			return;
 		try {
 			int[] rom = loadRom(c.getAssets().open("Loko.rom"), null);
 			vm = new MakoVM(rom);
@@ -82,16 +84,28 @@ public class MakoView extends View {
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		return super.onKeyUp(keyCode, event);
 	}
+	
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		heightMeasureSpec = MeasureSpec.makeMeasureSpec((MeasureSpec.getSize(widthMeasureSpec)/4)*3, MeasureSpec.EXACTLY);
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+	}
 
 	@Override
 	public void onDraw(Canvas c) {
 		super.onDraw(c);
+		if(isInEditMode())
+		{
+			c.drawColor(0xffff8800);
+			return;
+		}
 		c.save();
 		c.scale(2.5f, 2.5f);
 		c.drawBitmap(vm.p, 0, 320, 0, 0, 320, 240, false, null);
 		c.restore();
 		
 		vm.run();
+
 		postInvalidateDelayed(FRAME_RATE);
 	}
 }

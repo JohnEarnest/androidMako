@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<!--
-<TextView
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="Hello World, MainActivity"
-    />
--->
-<com.rtg.makovm.MakoView
-    android:id="@+id/MainActivity.MakoView"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-/>
-</LinearLayout>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
+    <com.rtg.makovm.MakoView
+        android:id="@+id/MainActivity.MakoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <include
+        android:id="@+id/MainActivity.Keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/cv_keyboard" />
+
+</LinearLayout>
