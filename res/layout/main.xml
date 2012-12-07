@@ -2,17 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-
+    android:orientation="vertical"
+	android:background="#000000"
+>
     <com.rtg.makovm.MakoView
         android:id="@+id/MainActivity.MakoView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"
+	/>
     <include
         android:id="@+id/MainActivity.Keyboard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/cv_keyboard" />
-
+        android:layout_height="match_parent"
+        layout="@layout/cv_keyboard"
+	/>
 </LinearLayout>

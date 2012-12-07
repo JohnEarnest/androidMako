@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:state_pressed="true"><shape android:shape="rectangle"><corners android:radius="8dp"/><stroke android:width="2dp" android:color="#fff"/> <solid android:color="#999"/></shape></item>
-	<item android:state_pressed="false"><shape android:shape="rectangle"><corners android:radius="8dp"/><stroke android:width="2dp" android:color="#fff"/> <solid android:color="#666"/></shape></item>
+    <item android:state_pressed="true">
+		<shape android:shape="rectangle">
+			<corners android:radius="4dp"/>
+			<stroke android:width="1.5dp" android:color="#00FF00"/>
+			<solid android:color="#4D5600"/>
+			<padding
+				android:left="1dp"
+				android:top="8dp"
+				android:right="1dp"
+				android:bottom="8dp"
+			/>
+		</shape>
+	</item>
+	<item android:state_pressed="false">
+		<shape android:shape="rectangle">
+			<corners android:radius="4dp"/>
+			<stroke android:width="1dp" android:color="#4D5600"/>
+			<solid android:color="#001A00"/>
+			<padding
+				android:left="1dp"
+				android:top="8dp"
+				android:right="1dp"
+				android:bottom="8dp"
+			/>
+		</shape>
+	</item>
 </selector>
