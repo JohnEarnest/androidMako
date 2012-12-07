@@ -5,6 +5,7 @@
     android:orientation="vertical"
 >
     <com.rtg.makovm.MakoView
+        android:keepScreenOn="true"
         android:id="@+id/MainActivity.MakoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

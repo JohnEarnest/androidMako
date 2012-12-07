@@ -74,6 +74,7 @@
         android:layout_height="wrap_content"
 	>
         <Button
+            android:id="@+id/MakoKeyboard.Shift"
             style="@style/keyboardButton"
             android:minWidth="56dp"
             android:text="@string/key_shift"

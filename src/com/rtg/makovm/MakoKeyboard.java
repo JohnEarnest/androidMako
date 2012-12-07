@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class MakoKeyboard extends LinearLayout {
@@ -18,6 +19,18 @@ public class MakoKeyboard extends LinearLayout {
 	
 	private MakoKeyboardListener mListener = null;
 	
+	private Button mShift = null;
+	
+	private boolean mShifted = false;
+	
+	private OnClickListener mShiftClickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			setShifted(!mShifted);
+		}
+	};
+	
 	private OnTouchListener mTouchListener = new OnTouchListener() {
 		
 		@Override
@@ -30,11 +43,12 @@ public class MakoKeyboard extends LinearLayout {
 			String key = (String) v.getTag();
 			if(event.getAction() == MotionEvent.ACTION_DOWN)
 			{
-				mListener.makoKeyboardKeyPressed(key);
+				mListener.makoKeyboardKeyPressed(mShifted?key.toUpperCase():key);
 			}
 			else if(event.getAction() == MotionEvent.ACTION_UP)
 			{
-				mListener.makoKeyboardKeyReleased(key);
+				mListener.makoKeyboardKeyReleased(mShifted?key.toUpperCase():key);
+				setShifted(false);
 			}
 			return false;
 		}
@@ -60,6 +74,9 @@ public class MakoKeyboard extends LinearLayout {
 	protected void onFinishInflate() {
 		super.onFinishInflate();
 		
+		mShift = (Button)findViewById(R.id.MakoKeyboard_Shift);
+		mShift.setOnClickListener(mShiftClickListener);
+		
 		// Tie up the callbacks on the keys
 		for(int i = 0; i<getChildCount(); i++)
 		{
@@ -75,5 +92,10 @@ public class MakoKeyboard extends LinearLayout {
 				}
 			}
 		}
+	}
+
+	private void setShifted(boolean shifted) {
+		mShifted = shifted;
+		mShift.setActivated(shifted);
 	}
 }
