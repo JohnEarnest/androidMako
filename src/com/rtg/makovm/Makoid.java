@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 
-public class MainActivity extends Activity {
+public class Makoid extends Activity {
 	private MakoView view = null;
 
 	@Override
@@ -15,7 +15,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main);
 
 		// Retrieve a reference to the view inflated in the layout
-		view = (MakoView) findViewById(R.id.MainActivity_MakoView);
+		view = (MakoView) findViewById(R.id.Makoid_MakoView);
 	}
 
 	@Override
