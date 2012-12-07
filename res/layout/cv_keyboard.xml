@@ -260,14 +260,14 @@
             style="@style/keyboardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=";"
+            android:text="@string/key_semicolon"
             android:textSize="12sp" />
 
         <Button
             style="@style/keyboardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="&apos;"
+            android:text="@string/key_apostrophe"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -314,14 +314,14 @@
             style="@style/keyboardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="B"
+            android:text="@string/key_B"
             android:textSize="12sp" />
 
         <Button
             style="@style/keyboardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="N"
+            android:text="@string/key_N"
             android:textSize="12sp" />
 
         <Button
@@ -329,28 +329,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="48dp"
-            android:text="M"
+            android:text="@string/key_M"
             android:textSize="12sp" />
 
         <Button
             style="@style/keyboardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=","
+            android:text="@string/key_comma"
             android:textSize="16sp" />
 
         <Button
             style="@style/keyboardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="."
+            android:text="@string/key_period"
             android:textSize="16sp" />
 
         <Button
             style="@style/keyboardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="?"
+            android:text="@string/key_qmark"
             android:textSize="16sp" />
     </LinearLayout>
 
