@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -167,7 +166,7 @@ public class RomChooserActivity extends ListActivity {
 			@Override
 			public void onItemClick(AdapterView<?> listView, View item, int pos,
 					long id) {
-				startActivity(new Intent(RomChooserActivity.this, MainActivity.class).putExtra(MainActivity.EXTRA_ROM_FILE, mRomAdapter.getItem(pos).getAbsolutePath()));
+				startActivity(new Intent(RomChooserActivity.this, Makoid.class).putExtra(Makoid.EXTRA_ROM_FILE, mRomAdapter.getItem(pos).getAbsolutePath()));
 				finish();
 			}
 			

@@ -6,16 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.Toast;
+
 import com.rtg.makovm.MakoKeyboard.MakoKeyboardListener;
 import com.rtg.makovm.MakoView.MakoViewListener;
 
 
-public class Makoid extends Activity {
-	public static final String EXTRA_ROM_FILE = "romfile";
-	private MakoView view = null;
-
-public class MainActivity extends Activity implements MakoKeyboardListener, MakoViewListener {
-	
+public class Makoid extends Activity implements MakoKeyboardListener, MakoViewListener {
 	public static final String EXTRA_ROM_FILE = "romfile";
 	
 	private MakoView mView = null;
@@ -117,5 +113,6 @@ public class MainActivity extends Activity implements MakoKeyboardListener, Mako
 	@Override
 	public void makoViewLoadError() {
 		Toast.makeText(this, "The ROM could not be loaded.", Toast.LENGTH_LONG).show();
+
 	}
 }
