@@ -7,117 +7,168 @@ import java.nio.IntBuffer;
 import android.view.KeyEvent;
 import android.view.View;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import android.graphics.*;
 
 public class MakoView extends View {
 
-	private static final int FRAME_RATE = 1000/60;
-	private MakoVM vm;
+	private static final String TAG = "MakoView";
+	private static final int FRAME_RATE = 1000 / 60;
+	private MakoVM mVm;
+
+	public interface MakoViewListener {
+		public void makoViewStartLoading();
+
+		public void makoViewFinishLoading();
+
+		public void makoViewLoadError();
+	}
+
+	private MakoViewListener mListener = null;
+
+	public void setListener(MakoViewListener listener) {
+		mListener = listener;
+	}
+
+	private class RomLoadTask extends AsyncTask<String, Void, Boolean> {
+		private int[] mLoadedRom = null;
+
+		@Override
+		protected void onPreExecute() {
+			if(mListener!=null)
+			{
+				mListener.makoViewStartLoading();
+			}
+		}
+		
+		@Override
+		protected Boolean doInBackground(String... params) {
+			// Only can load one rom at a time... which makes sense
+			try {
+				mLoadedRom = loadRom(new FileInputStream(params[0]), null);
+				return true;
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			if (mListener != null) {
+				if (!result) {
+					mListener.makoViewLoadError();
+				}
+				else
+				{
+					mVm = new MakoVM(mLoadedRom);
+					postInvalidate(); // Start rendering
+				}
+				mListener.makoViewFinishLoading();
+				
+			}
+		}
+	}
 
 	public MakoView(Context c, AttributeSet a) {
 		super(c, a);
-		if(isInEditMode())
-			return;
-		try {
-			int[] rom = loadRom(c.getAssets().open("Loko.rom"), null);
-			vm = new MakoVM(rom);
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-		}
+	}
+
+	public void setRom(String filename) {
+		mVm = null;
+		new RomLoadTask().execute(filename);
 	}
 
 	private static int[] loadRom(InputStream i, int[] prev) {
 		try {
 			int romSize = i.available();
-			
-			// Allocate a byteBuffer, this will be used later to convert the bytes
+
+			// Allocate a byteBuffer, this will be used later to convert the
+			// bytes
 			// into an integer array
 			ByteBuffer buffer = ByteBuffer.allocate(romSize);
 			buffer.clear();
 			byte[] page = new byte[4096];
 			int read = 0;
 			int totalRead = 0;
-			while(i.available()>0)
-			{
+			while (i.available() > 0) {
 				read = i.read(page, 0, 4096);
 				totalRead += read;
-				buffer.put(page,0, read);
+				buffer.put(page, 0, read);
 			}
-			int[] rom = new int[totalRead/4];
+			int[] rom = new int[totalRead / 4];
 			buffer.rewind();
 			IntBuffer intBuf = buffer.asIntBuffer();
 			intBuf.get(rom);
 			buffer.clear();
 			i.close();
-			System.out.println("Restored from save file!");
+			Log.i(TAG, "Restored from save file!");
 			return rom;
-		}
-		catch(IOException ioe) {
-			System.out.println("Unable to load rom!");
+		} catch (IOException ioe) {
+			Log.e(TAG, "Unable to load rom!");
 			return prev;
 		}
 	}
 
-	int keyTimeout = 0;
 	public void setKeys(int mask) {
-		vm.keys = mask;
-		keyTimeout = 1;
+		mVm.keys |= mask;
 	}
 
-	public void keyTyped(int character) {
-		vm.keyQueue.add(character);
+	public void unsetKeys(int mask) {
+		mVm.keys -= (mVm.keys & mask);
 	}
 
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent event) {
 		if (event.getAction() == KeyEvent.ACTION_DOWN) {
 			if (event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-				keyTyped(8);
-			}
-			else {
-				keyTyped(event.getUnicodeChar());
+				keyPressed(8);
+			} else {
+				keyPressed(event.getUnicodeChar());
 			}
 		}
 		return super.dispatchKeyEvent(event);
 	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		return super.onKeyDown(keyCode, event);
-	}
-	
-	@Override
-	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		return super.onKeyUp(keyCode, event);
-	}
-	
+
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		heightMeasureSpec = MeasureSpec.makeMeasureSpec((MeasureSpec.getSize(widthMeasureSpec)/4)*3, MeasureSpec.EXACTLY);
+		heightMeasureSpec = MeasureSpec.makeMeasureSpec(
+				(MeasureSpec.getSize(widthMeasureSpec) / 4) * 3,
+				MeasureSpec.EXACTLY);
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}
 
 	@Override
 	public void onDraw(Canvas c) {
 		super.onDraw(c);
-		if(isInEditMode())
-		{
+		if (isInEditMode()) {
 			c.drawColor(0xffff8800);
 			return;
 		}
+		
+		if(mVm == null)
+		{
+			return;
+		}
+		
 		c.save();
 		c.scale(2.5f, 2.5f);
-		c.drawBitmap(vm.p, 0, 320, 0, 0, 320, 240, false, null);
+		c.drawBitmap(mVm.p, 0, 320, 0, 0, 320, 240, false, null);
 		c.restore();
-		
-		vm.run();
 
-		if (keyTimeout == 0) { vm.keys = 0; }
-		else { keyTimeout--; }
+		mVm.run();
 
 		postInvalidateDelayed(FRAME_RATE);
+	}
+
+	public void keyPressed(int charAt) {
+		mVm.keyQueue.add(charAt);
+	}
+
+	public void keyReleased(int charAt) {
+		// Nothing?
 	}
 }
