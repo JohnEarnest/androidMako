@@ -6,9 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.Toast;
-
 import com.rtg.makovm.MakoKeyboard.MakoKeyboardListener;
 import com.rtg.makovm.MakoView.MakoViewListener;
+
+
+public class Makoid extends Activity {
+	public static final String EXTRA_ROM_FILE = "romfile";
+	private MakoView view = null;
 
 public class MainActivity extends Activity implements MakoKeyboardListener, MakoViewListener {
 	
@@ -42,12 +46,12 @@ public class MainActivity extends Activity implements MakoKeyboardListener, Mako
 		}
 
 		// Retrieve a reference to the view inflated in the layout
-		mView = (MakoView) findViewById(R.id.MainActivity_MakoView);
+		mView = (MakoView) findViewById(R.id.Makoid_MakoView);
 		mView.setListener(this);
 		
 		mView.setRom(mRomFileName);
 		
-		mKeyboard = (MakoKeyboard) findViewById(R.id.MainActivity_Keyboard);
+		mKeyboard = (MakoKeyboard) findViewById(R.id.Makoid_Keyboard);
 		mKeyboard.setListener(this);
 	}
 
