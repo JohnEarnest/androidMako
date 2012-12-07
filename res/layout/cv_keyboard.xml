@@ -12,12 +12,6 @@
             style="@style/keyboardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Esc" />
-
-        <Button
-            style="@style/keyboardButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="1"
             android:textSize="12sp" />
 
@@ -84,18 +78,25 @@
             android:layout_height="wrap_content"
             android:text="0"
             android:textSize="12sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
 
         <Button
             style="@style/keyboardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="64dp"
-            android:text="Tab" />
+            android:text="-"
+            android:textSize="12sp" />
+
+        <Button
+            style="@style/keyboardButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
         <Button
             style="@style/keyboardButton"
@@ -167,18 +168,29 @@
             android:layout_height="wrap_content"
             android:text="P"
             android:textSize="12sp" />
+
+        <Button
+            style="@style/keyboardButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="["
+            android:textSize="12sp" />
+
+        <Button
+            style="@style/keyboardButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="]"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <Button
-            style="@style/keyboardButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="72dp"
-            android:text="Caps" />
+        <Space
+            android:layout_width="24dp"
+            android:layout_height="0dp" />
 
         <Button
             style="@style/keyboardButton"
@@ -250,6 +262,13 @@
             android:layout_height="wrap_content"
             android:text=";"
             android:textSize="12sp" />
+
+        <Button
+            style="@style/keyboardButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="&apos;"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -262,13 +281,6 @@
             android:layout_height="wrap_content"
             android:minWidth="56dp"
             android:text="Shift" />
-
-        <Button
-            style="@style/keyboardButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="`"
-            android:textSize="12sp" />
 
         <Button
             style="@style/keyboardButton"
@@ -325,32 +337,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=","
-            android:textSize="12sp" />
+            android:textSize="16sp" />
 
         <Button
             style="@style/keyboardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="."
-            android:textSize="12sp" />
+            android:textSize="16sp" />
+
+        <Button
+            style="@style/keyboardButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="?"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <Button
-            style="@style/keyboardButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            
-            android:text="CTRL" />
-
-        <Button
-            style="@style/keyboardButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ALT"/>
+        android:layout_height="wrap_content"
+        android:gravity="center" >
 
         <Button
             style="@style/keyboardButton"
