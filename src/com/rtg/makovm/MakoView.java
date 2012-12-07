@@ -61,15 +61,24 @@ public class MakoView extends View {
 		}
 	}
 
+	int keyTimeout = 0;
+	public void setKeys(int mask) {
+		vm.keys = mask;
+		keyTimeout = 1;
+	}
+
+	public void keyTyped(int character) {
+		vm.keyQueue.add(character);
+	}
+
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent event) {
 		if (event.getAction() == KeyEvent.ACTION_DOWN) {
 			if (event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-				// I don't seem to be actually getting these key events.
-				vm.keyQueue.add(8);
+				keyTyped(8);
 			}
 			else {
-				vm.keyQueue.add(event.getUnicodeChar());
+				keyTyped(event.getUnicodeChar());
 			}
 		}
 		return super.dispatchKeyEvent(event);
@@ -105,6 +114,9 @@ public class MakoView extends View {
 		c.restore();
 		
 		vm.run();
+
+		if (keyTimeout == 0) { vm.keys = 0; }
+		else { keyTimeout--; }
 
 		postInvalidateDelayed(FRAME_RATE);
 	}

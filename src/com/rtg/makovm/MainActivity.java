@@ -1,8 +1,10 @@
 package com.rtg.makovm;
 
+import android.util.Log;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 
 public class MainActivity extends Activity {
 	private MakoView view = null;
@@ -37,5 +39,20 @@ public class MainActivity extends Activity {
 	@Override
 	public void onBackPressed() {
 		return;
+	}
+
+	public void softKey(View v) {
+		if (v.getTag() == null) { return; }
+		String tag = (String)v.getTag();
+
+		if      ("Delete".equals(tag)) { view.keyTyped( 8); }
+		else if ( "Enter".equals(tag)) { view.keyTyped(10); }
+		else if (    "up".equals(tag)) { view.setKeys(MakoConstants.KEY_UP); }
+		else if (    "dn".equals(tag)) { view.setKeys(MakoConstants.KEY_DN); }
+		else if (    "lf".equals(tag)) { view.setKeys(MakoConstants.KEY_LF); }
+		else if (    "rt".equals(tag)) { view.setKeys(MakoConstants.KEY_RT); }
+		else {
+			view.keyTyped((int)tag.charAt(0));
+		}
 	}
 }
