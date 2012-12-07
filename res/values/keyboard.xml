@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="key_qmark">\?</string>
+    <string name="key_period">.</string>
+    <string name="key_comma">,</string>
+    <string name="key_M">M</string>
+    <string name="key_N">N</string>
+    <string name="key_B">B</string>
+    <string name="key_semicolon">;</string>
+    <string name="key_apostrophe">\'</string>
+</resources>
