@@ -65,14 +65,15 @@ public class Makoid extends Activity implements MakoKeyboardListener, MakoViewLi
 
 	@Override
 	public void makoKeyboardKeyPressed(String key) {
-		if      ("Delete".equals(key)) { mView.keyPressed( 8); }
+		if      (   "Del".equals(key)) { mView.keyPressed( 8); }
+		else if (   "Brk".equals(key)) { mView.keyPressed( 3); }
 		else if ( "Enter".equals(key)) { mView.keyPressed(10); }
 		else if (    "up".equals(key)) { mView.setKeys(MakoConstants.KEY_UP); }
 		else if (    "dn".equals(key)) { mView.setKeys(MakoConstants.KEY_DN); }
 		else if (    "lf".equals(key)) { mView.setKeys(MakoConstants.KEY_LF); }
 		else if (    "rt".equals(key)) { mView.setKeys(MakoConstants.KEY_RT); }
 		else {
-			if(key.equals("a"))
+			if(key.equals(" "))
 			{
 				mView.setKeys(MakoConstants.KEY_A);
 			}
@@ -83,14 +84,15 @@ public class Makoid extends Activity implements MakoKeyboardListener, MakoViewLi
 
 	@Override
 	public void makoKeyboardKeyReleased(String key) {
-		if      ("Delete".equals(key)) { mView.keyReleased( 8); }
+		if      (   "Del".equals(key)) { mView.keyReleased( 8); }
+		else if (   "Brk".equals(key)) { mView.keyReleased( 3); }
 		else if ( "Enter".equals(key)) { mView.keyReleased(10); }
 		else if (    "up".equals(key)) { mView.unsetKeys(MakoConstants.KEY_UP); }
 		else if (    "dn".equals(key)) { mView.unsetKeys(MakoConstants.KEY_DN); }
 		else if (    "lf".equals(key)) { mView.unsetKeys(MakoConstants.KEY_LF); }
 		else if (    "rt".equals(key)) { mView.unsetKeys(MakoConstants.KEY_RT); }
 		else {
-			if(key.equals("a"))
+			if(key.equals(" "))
 			{
 				mView.unsetKeys(MakoConstants.KEY_A);
 			}
