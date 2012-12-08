@@ -33,7 +33,7 @@ public class RomChooserActivity extends ListActivity {
 			
 			@Override
 			public int compare(File lhs, File rhs) {
-				return (rhs.lastModified()<lhs.lastModified())?1:-1;
+				return (rhs.lastModified()<lhs.lastModified())?-1:1;
 			}
 		};
 		
