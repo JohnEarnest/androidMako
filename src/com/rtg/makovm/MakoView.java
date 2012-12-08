@@ -126,7 +126,8 @@ public class MakoView extends View {
 		if (event.getAction() == KeyEvent.ACTION_DOWN) {
 			if (event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
 				keyPressed(8);
-			} else {
+			}
+			else if (event.getUnicodeChar() < 128 && event.getUnicodeChar() > 31) {
 				keyPressed(event.getUnicodeChar());
 			}
 		}
