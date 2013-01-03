@@ -123,13 +123,24 @@ public class MakoView extends View {
 
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent event) {
+		int k = event.getKeyCode();
 		if (event.getAction() == KeyEvent.ACTION_DOWN) {
-			if (event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
-				keyPressed(8);
-			}
+			if      (k == KeyEvent.KEYCODE_DEL)        { keyPressed( 8); }
+			else if (k == KeyEvent.KEYCODE_ENTER)      { keyPressed(10); }
+			else if (k == KeyEvent.KEYCODE_DPAD_UP)    { setKeys(MakoConstants.KEY_UP); }
+			else if (k == KeyEvent.KEYCODE_DPAD_DOWN)  { setKeys(MakoConstants.KEY_DN); }
+			else if (k == KeyEvent.KEYCODE_DPAD_LEFT)  { setKeys(MakoConstants.KEY_LF); }
+			else if (k == KeyEvent.KEYCODE_DPAD_RIGHT) { setKeys(MakoConstants.KEY_RT); }
+			else if (k == KeyEvent.KEYCODE_C && event.isCtrlPressed()) { keyPressed(3); }
 			else if (event.getUnicodeChar() < 128 && event.getUnicodeChar() > 31) {
 				keyPressed(event.getUnicodeChar());
 			}
+		}
+		else if (event.getAction() == KeyEvent.ACTION_UP) {
+			if      (k == KeyEvent.KEYCODE_DPAD_UP)    { unsetKeys(MakoConstants.KEY_UP); }
+			else if (k == KeyEvent.KEYCODE_DPAD_DOWN)  { unsetKeys(MakoConstants.KEY_DN); }
+			else if (k == KeyEvent.KEYCODE_DPAD_LEFT)  { unsetKeys(MakoConstants.KEY_LF); }
+			else if (k == KeyEvent.KEYCODE_DPAD_RIGHT) { unsetKeys(MakoConstants.KEY_RT); }
 		}
 		return super.dispatchKeyEvent(event);
 	}
